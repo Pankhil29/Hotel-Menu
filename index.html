@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .container {
+            height: 330px;
+            width: 750px;
+            background-color: aqua;
+            margin-top: 40px;
+            margin-left: 350px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .product {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .product1,
+        .product2,
+        .product3,
+        .product4 {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .name {
+            height: 180px;
+        }
+
+        .bill {
+            display: flex;
+            flex-direction: column;
+            align-content: flex-start;
+            width: 180px;
+        }
+
+        button {
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 4px 4px black;
+            margin: 3px;
+
+        }
+
+        /* button:hover {} */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="product">
+            <div class="product1" id="product1">
+                <div class="name">
+                    <img src="mars10.jpg" alt="" width="100px">
+                    <h3>name : Abc </h3>
+                    <p>Price : 20</p>
+                    <p id="item1"></p>
+                </div>
+                <div>
+                    <button onclick="add(20)">Add to Cart</button>
+                    <button onclick="remove(20)">Remove</button>
+                </div>
+            </div>
+            <div class="product2">
+                <div class="name">
+                    <img src="kitkat.jpg" alt="" width="115px">
+                    <h3>name : Abc </h3>
+                    <p>Price : 30</p>
+                    <p id="item2"></p>
+
+                </div>
+                <div>
+                    <button onclick="add(30)">Add to Cart</button>
+                    <button onclick="remove(30)">Remove</button>
+                </div>
+            </div>
+            <div class="product3">
+                <div class="name">
+                    <img src="50.webp" alt="" width="65px">
+                    <h3>name : Abc </h3>
+                    <p>Price : 50</p>
+                    <p id="item3"></p>
+
+                </div>
+                <div>
+                    <button onclick="add(50)">Add to Cart</button>
+                    <button onclick="remove(50)">Remove</button>
+                </div>
+            </div>
+            <div class="product4">
+                <div class="name">
+                    <img src="80.jpg" alt="" width="70px">
+                    <h3>name : Abc </h3>
+                    <p>Price : 70</p>
+                    <p id="item4"></p>
+
+                </div>
+                <div>
+                    <button onclick="add(70)">Add to Cart</button>
+                    <button onclick="remove(70)">Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="bill">
+
+            <p>Items : <span id="item"></span></p>
+            <p>Total Amount : <span id="total"></span></p>
+            <p>Price with GST : <span id="gst"></span></p>
+
+            <button class="voucher" id="voucher" onclick="discount(10)">Voucher 10%
+            </button>
+            <p>Total Price : <span id="aftrdis"></span></p>
+            <button onclick="ac()">All Clear</button>
+        </div>
+    </div>
+    <script>
+        //var p1 = document.getElementById();
+        var count = 0;
+        var sum = 0;
+        var gst = 0;
+        var item1 = 0;
+        var item2 = 0;
+        var item3 = 0;
+        var item4 = 0;
+        function add(num) {
+            if (num === 20) {
+                item1++;
+                document.getElementById("item1").innerText = item1;
+            }
+            else if (num === 30) {
+
+                item2++;
+                document.getElementById("item2").innerText = item2;
+            }
+            else if (num === 50) {
+
+                item3++;
+                document.getElementById("item3").innerText = item3;
+            }
+            else if (num === 70) {
+                item4++;
+                document.getElementById("item4").innerText = item4;
+            }
+            var a = document.getElementById("item");
+            count++;
+            a.innerText = count;
+            sum = parseInt(sum) + parseInt(num);
+            document.getElementById("total").innerText = sum;
+            gst = document.getElementById("gst");
+            gst.innerText = parseInt(sum) * 0.18 + sum;
+
+        }
+        function discount(num) {
+            var gst = document.getElementById("gst").innerText;
+            var afterdis = document.getElementById("aftrdis");
+
+            aftrdis.innerText = parseInt(gst) - parseInt(gst) * 0.1;
+
+
+        }
+        function ac(num) {
+
+            var a = document.getElementById("item");
+            a.innerText = "";
+            document.getElementById("total").innerText = "";
+            document.getElementById("gst").innerText = "";
+            document.getElementById("aftrdis").innerText = "";
+            count = 1;
+            gst = 0;
+            sum = 0;
+            // console.log(item1);
+            // console.log(item2);
+            // console.log(item3);
+            // console.log(item4);
+            item1 = 0;
+            item2 = 0;
+            item3 = 0;
+            item4 = 0;
+            document.getElementById("item1").innerText = item1;
+            document.getElementById("item2").innerText = item2;
+            document.getElementById("item3").innerText = item3;
+            document.getElementById("item4").innerText = item4;
+
+        }
+        function remove(num) {
+            if (num === 20) {
+                if (item1 === 0)
+                    return;
+                item1 = document.getElementById("item1").innerText;
+                total = document.getElementById("total").innerText;
+                if (item1 > 0) {
+                    item1--;
+                    document.getElementById("item1").innerText = item1;
+                    total = parseInt(total) - parseInt(num);
+                    document.getElementById("total").innerText = total;
+                    // count = document.getElementById("count").innerText;
+                    count--;
+                    document.getElementById("item").innerText = count;
+
+                    document.getElementById("gst").innerText = total + total * 0.18;
+
+
+
+
+                }
+            }
+            else if (num === 30) {
+                if (item2 === 0)
+                    return;
+                item2 = document.getElementById("item2").innerText;
+                total = document.getElementById("total").innerText;
+                if (item2 > 0) {
+                    item2--;
+                    document.getElementById("item2").innerText = item2;
+                    total = parseInt(total) - parseInt(num);
+                    document.getElementById("total").innerText = total;
+                    // count = document.getElementById("count").innerText;
+                    count--;
+                    document.getElementById("item").innerText = count;
+
+                    document.getElementById("gst").innerText = total + total * 0.18;
+
+                }
+            }
+            else if (num === 50) {
+                if (item3 === 0)
+                    return;
+                item3 = document.getElementById("item3").innerText;
+                total = document.getElementById("total").innerText;
+                if (item3 > 0) {
+                    item3--;
+                    document.getElementById("item3").innerText = item3;
+                    total = parseInt(total) - parseInt(num);
+                    document.getElementById("total").innerText = total;
+                    // count = document.getElementById("count").innerText;
+                    count--;
+                    document.getElementById("item").innerText = count;
+                    document.getElementById("gst").innerText = total + total * 0.18;
+                }
+            }
+            else if (num === 70) {
+                if (item4 === 0)
+                    return;
+                item4 = document.getElementById("item4").innerText;
+                total = document.getElementById("total").innerText;
+                if (item4 > 0) {
+                    item4--;
+                    document.getElementById("item4").innerText = item4;
+                    total = parseInt(total) - parseInt(num);
+                    document.getElementById("total").innerText = total;
+                    // count = document.getElementById("count").innerText;
+                    count--;
+                    document.getElementById("item").innerText = count;
+                    document.getElementById("gst").innerText = total + total * 0.18;
+                }
+            }
+            // total = document.getElementById("total").innerText;
+            // total = parseInt(total) - parseInt(num);
+            // document.getElementById("total").innerText = total;
+            // // count = document.getElementById("count").innerText;
+            // count = count - 1;
+            // document.getElementById("item").innerText = count;
+
+        }
+
+    </script>
+</body>
+
+</html>
